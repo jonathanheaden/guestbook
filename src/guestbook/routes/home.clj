@@ -1,6 +1,8 @@
 (ns guestbook.routes.home
   (:require [compojure.core :refer :all]
-            [guestbook.views.layout :as layout]))
+            [guestbook.views.layout :as layout]
+            [hiccup.form :refer :all]))
+
 
 (defn home []
   (layout/common
