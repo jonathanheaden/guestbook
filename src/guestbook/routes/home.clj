@@ -14,17 +14,6 @@
       [:time timestamp]]
      )])
 
-(defn save-message [name message]
-  (cond
-    (empty? name)
-    (home name message "Some dummy forgot to leave a name")
-    (empty? message)
-    (home name message "Don't you have something to say?")
-    :else
-    (do
-      (println name message)
-      (home))))
-
 (defn home [& [name message error]]
   (layout/common
    [:h1 "Guestbook"]
@@ -43,6 +32,16 @@
             (text-area {:rows 10 :cols 40} "message" message) [:br]
             (submit-button "comment"))))
 
+(defn save-message [name message]
+  (cond
+    (empty? name)
+    (home name message "Some dummy forgot to leave a name")
+    (empty? message)
+    (home name message "Don't you have something to say?")
+    :else
+    (do
+      (println name message)
+      (home))))
 
 (defroutes home-routes
   (GET "/" [] (home))
