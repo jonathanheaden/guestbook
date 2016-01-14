@@ -14,15 +14,28 @@
       [:time timestamp]]
      )])
 
+(defn save-message [name message]
+  (cond
+    (empty? name)
+    (home name message "Some dummy forgot to leave a name")
+    (empty? message)
+    (home name message "Don't you have something to say?")
+    :else
+    (do
+      (println name message)
+      (home))))
+
 (defn home [& [name message error]]
   (layout/common
    [:h1 "Guestbook"]
    [:p "Welcome to my guestbook"]
    [:p error]
    ;here we call our show-guests function
-   ;to generate the list of existing comments (show-guests)
+   ;to generate the list of existing comments
+   (show-guests)
    [:hr]
-   ;here we create a form with text fields called "name" and "message" ;these will be sent when the form posts to the server as keywords of ;the same name
+   ;here we create a form with text fields called "name" and "message"
+   ;these will be sent when the form posts to the server as keywords of ;the same name
    (form-to [:post "/"]
             [:p "Name:"]
             (text-field "name" name)
@@ -32,4 +45,5 @@
 
 
 (defroutes home-routes
-  (GET "/" [] (home)))
+  (GET "/" [] (home))
+  (POST "/" [name message] (save-message name message)))
