@@ -40,6 +40,7 @@
     :else
     (do
       (println name message)
+      (db/save-message name message)
       (home))))
 
 (defroutes home-routes
