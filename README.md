@@ -1,6 +1,6 @@
 # guestbook
 
-FIXME
+Follow allong tutorial for 'Web Development with Clojure'
 
 ## Prerequisites
 
