@@ -7,6 +7,7 @@
             [compojure.route :as route]
             [guestbook.routes.home :refer [home-routes]]
             [guestbook.models.db :as db]
+            [guestbook.routes.auth :refer [auth-routes]]
             ))
 
 (defn init []
@@ -22,6 +23,6 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes app-routes)
+  (-> (routes auth-routes home-routes app-routes)
       (handler/site)
       (wrap-base-url)))
